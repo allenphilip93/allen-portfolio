@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Create a website using NodeJS in 5 mins</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel='icon' href='../images/favicon.ico' type='image/x-icon'/>
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,700" rel="stylesheet">
+
+    <link rel="stylesheet" href="../css/open-iconic-bootstrap.min.css">
+    <link rel="stylesheet" href="../css/animate.css">
+    
+    <link rel="stylesheet" href="../css/owl.carousel.min.css">
+    <link rel="stylesheet" href="../css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="../css/magnific-popup.css">
+
+    <link rel="stylesheet" href="../css/aos.css">
+
+    <link rel="stylesheet" href="../css/ionicons.min.css">
+
+    <link rel="stylesheet" href="../css/bootstrap-datepicker.css">
+    <link rel="stylesheet" href="../css/jquery.timepicker.css">
+
+    
+    <link rel="stylesheet" href="../css/flaticon.css">
+    <link rel="stylesheet" href="../css/icomoon.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://jmblog.github.io/color-themes-for-google-code-prettify/themes/github.css">
+    <link rel="stylesheet" href="https://jmblog.github.io/color-themes-for-google-code-prettify/themes/github.min.css">
+
+    <link rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/androidstudio.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+  </head>
+  <body>
+
+    <div class="KW_progressContainer">
+      <div class="KW_progressBar">
+
+      </div>
+    </div>
+    <div class="page">
+    <nav id="colorlib-main-nav" role="navigation">
+      <a href="#" class="js-colorlib-nav-toggle colorlib-nav-toggle active"><i></i></a>
+      <div class="js-fullheight colorlib-table">
+      	<div class="img" style="background-image: url(images/author-2.jpg);"></div>
+        <div class="colorlib-table-cell js-fullheight">
+          <div class="row no-gutters">
+            <div class="col-md-12 text-center">
+              <h1 class="mb-4"><a href="../index.html" class="logo">Allen Philip J</a></h1>
+              <ul>
+                <li><a href="../index.html"><span><small>01</small>Home</span></a></li>
+                <li><a href="../about.html"><span><small>02</small>Resume</span></a></li>
+                <li><a href="../services.html"><span><small>03</small>Services</span></a></li>
+                <li><a href="../portfolio.html"><span><small>04</small>Portfolio</span></a></li>
+                <li class="active"><a href="../blog.html"><span><small>05</small>Blog</span></a></li>
+                <li><a href="../contact.html"><span><small>06</small>Contact</span></a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+    
+    <div id="colorlib-page">
+      <header>
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="colorlib-navbar-brand">
+                <a class="colorlib-logo" href="../blog.html"><span class="logo-img" style="background-image: url(images/person_1.jpg);"></span>Allen Philip J</a>
+              </div>
+              <a href="#" class="js-colorlib-nav-toggle colorlib-nav-toggle"><i></i></a>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <section class="ftco-section">
+        <div class="container mt-5">
+        	<div class="row justify-content-center mb-5 pb-5">
+            <div class="col-md-7 text-center heading-section ftco-animate">
+              <span>Blog</span>
+              <h2>Create a website using NodeJS in 5 mins</h2>
+            </div>
+          </div>
+          <div class="row d-flex justify-content-center">
+            <div class="col-md-8">
+              <h2 class="mb-3">#1. What are web applications?</h2>
+              <p>In simple terms a Web Application (or webapp for short) is an application software made available on the web (internet). Any application that is running on a server and can be accessed over the web can be called a webapp.</p>
+              <p>For example, your company/school website, WhatApp, YouTube etc they're all webapps. In the context of this article we will be talking only about a static website which can be used as a portfolio website or a blog website etc.</p>
+              
+              <h2 class="mb-3 mt-5">#2. Prerequisites</h2>
+              <p>Ensure that you have NodeJS installed, if not you can find the steps to install the same at <a href="https://nodejs.org/en/download/">https://nodejs.org/en/download/</a>. It would be best to install the 12.x LTS (Long Term Support) version.</p>
+              <p>NodeJS is a platform built on Chrome's JavaScript runtime for easily building fast and scalable network applications. You can learn more about NodeJS and its wonders at <a href="https://www.freecodecamp.org/news/what-exactly-is-node-js-ae36e97449f5/">https://www.freecodecamp.org/news/what-exactly-is-node-js-ae36e97449f5/</a></p>
+
+              <h2 class="mb-3 mt-5">#3. Creating the webapp</h2>
+              <p>Create a folder and run the following command. Follow the steps to initialize the NodeJS webapp.</p>
+              <pre><code class="bash hljs">C:\sample>npm init
+This utility will walk you through creating a package.json file.
+It only covers the most common items, and tries to guess sensible defaults.
+
+See `npm help json` for definitive documentation on these fields
+and exactly what they do.
+
+Use `npm install <pkg>` afterwards to install a package and
+save it as a dependency in the package.json file.
+
+Press ^C at any time to quit.
+package name: (sample)
+version: (1.0.0)
+description:
+entry point: (index.js)
+test command:
+git repository:
+keywords:
+author:
+license: (ISC)
+About to write to C:\sample\package.json:
+
+{
+  "name": "sample",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
+
+
+Is this OK? (yes) yes</code></pre>
+              <p>Install express-generator, a web framework for NodeJS to setup a webapp quickly.</p>
+              <pre><code class="bash hljs">npm install -g express-generator</code></pre>
+              <p>Once the package is installed, run this command to view the help.</p>
+              <pre><code class="bash hljs">C:\sample>express -h
+
+Usage: express [options] [dir]
+
+Options:
+
+      --version        output the version number
+  -e, --ejs            add ejs engine support
+      --pug            add pug engine support
+      --hbs            add handlebars engine support
+  -H, --hogan          add hogan.js engine support
+  -v, --view <engine>  add view <engine> support (dust|ejs|hbs|hjs|jade|pug|twig|vash) (defaults to jade)
+      --no-view        use static html instead of view engine
+  -c, --css <engine>   add stylesheet <engine> support (less|stylus|compass|sass) (defaults to plain css)
+      --git            add .gitignore
+  -f, --force          force on non-empty directory
+  -h, --help           output usage information</code></pre>
+              <p>We would like to create a static website so run the following command to create a webapp without any view.</p>
+              <pre><code class="bash hljs">C:\sample>express --no-view</code></pre>
+              <p>Now install all the dependencies using the following command.</p>
+              <pre><code class="bash hljs">C:\sample>npm install</code></pre>
+              <h2 class="mb-3 mt-5">#4. Running the webapp</h2>
+              <p>To test if the webapp is setup correctly, run the following command.</p>
+              <pre><code class="bash hljs">C:\sample>npm start
+
+> sample@0.0.0 start C:\sample
+> node ./bin/www
+</code></pre>
+              <p>You can access your website using http://localhost:3000. The webapp can be accessed by anyone in the network using the url <b>http://{machine-name}:3000 or http://{IP-address}:3000</b>.</p>
+              <p>
+                <img src="../images/blog1a.png" alt="" class="img-fluid">
+              </p>
+              <p>You can modify the html files and add your own content from the <b>./public/</b> folder in your workspace.</p>
+              <div class="tag-widget post-tag-container mb-5 mt-5">
+                <div class="tagcloud">
+                  <a href="#" class="tag-cloud-link">Tech</a>
+                  <a href="#" class="tag-cloud-link">NodeJS</a>
+                </div>
+              </div>
+              
+              <div class="about-author d-flex pt-5">
+                <div class="bio align-self-md-center mr-4">
+                  <img src="../images/person_1.jpg" alt="Image placeholder" class="img-fluid mb-4">
+                </div>
+                <div class="desc align-self-md-center">
+                  <h3>About The Author</h3>
+                  <p>Allen Philip is a passionate software engineer with over 6 years of experience dunking coffee, starring at screen, pulling out hair strands and changing the world one commit at a time.</p>
+                </div>
+              </div>
+
+            </div> <!-- .col-md-8 -->
+
+          </div>
+        </div>
+      </section>
+      
+      <footer class="ftco-footer ftco-bg-dark ftco-section">
+        <div class="container">
+          <div class="row mb-5 justify-content-center">
+            <div class="col-md-5 text-center">
+              <div class="ftco-footer-widget mb-5">
+                <ul class="ftco-footer-social list-unstyled">
+                  <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
+                  <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
+                  <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
+                </ul>
+              </div>
+              <div class="ftco-footer-widget">
+                <h2 class="mb-3">Contact Us</h2>
+                <p class="h3 email"><a href="#">info@email.com</a></p>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12 text-center">
+
+              <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+      Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart" aria-hidden="true" style="color: red;"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+      <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
+            </div>
+          </div>
+        </div>
+      </footer>
+
+      <!-- loader -->
+      <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
+
+      </div>
+
+    </div>
+
+
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/jquery-migrate-3.0.1.min.js"></script>
+    <script src="../js/popper.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/jquery.easing.1.3.js"></script>
+    <script src="../js/jquery.waypoints.min.js"></script>
+    <script src="../js/jquery.stellar.min.js"></script>
+    <script src="../js/owl.carousel.min.js"></script>
+    <script src="../js/jquery.magnific-popup.min.js"></script>
+    <script src="../js/aos.js"></script>
+    <script src="../js/jquery.animateNumber.min.js"></script>
+    <script src="../js/scrollax.min.js"></script>
+    <script src="../js/bootstrap-datepicker.js"></script>
+    <script src="../js/jquery.timepicker.min.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
+    <script src="../js/google-map.js"></script>
+    <script src="../js/main.js"></script>
+    
+  </body>
+</html>
