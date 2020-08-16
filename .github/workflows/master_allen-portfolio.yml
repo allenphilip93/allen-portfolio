@@ -28,6 +28,6 @@ jobs:
     - name: 'Deploy to Azure Web App'
       uses: azure/webapps-deploy@v1
       with:
-        app-name: 'allen-portfolio'
+        app-name: 'allenphilip-portfolio'
         publish-profile: ${{ secrets.AzureAppService_PublishProfile_b52a17eb3b4e4df7b8893b6e9918bfd9 }}
         package: .
