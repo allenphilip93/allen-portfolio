@@ -82,97 +82,127 @@
         	<div class="row justify-content-center mb-5 pb-5">
             <div class="col-md-7 text-center heading-section ftco-animate">
               <span>Blog</span>
-              <h2>Create a website using NodeJS in 5 mins</h2>
+              <h2>Hosting your webapp on Azure on free tier</h2>
             </div>
           </div>
           <div class="row d-flex justify-content-center">
             <div class="col-md-8">
-              <h2 class="mb-3">#1. What are web applications?</h2>
-              <p>In simple terms a Web Application (or webapp for short) is an application software made available on the web (internet). Any application that is running on a server and can be accessed over the web can be called a webapp.</p>
-              <p>For example, your company/school website, WhatApp, YouTube etc they're all webapps. In the context of this article we will be talking only about a static website which can be used as a portfolio website or a blog website etc.</p>
+              <h2 class="mb-3">#1. Why do I need this?</h2>
+              <p>Azure free tier gives a quick and simple way to setup quickly a website for yourself. This could serve as your portfolio website or your blog website or a podcast website etc.</p>
+              <p>This integrates right back into your GitHub account which allows us to create actions which will automatically re-deploy the webapp on commit to say the master branch.</p>
               
               <h2 class="mb-3 mt-5">#2. Prerequisites</h2>
-              <p>Ensure that you have NodeJS installed, if not you can find the steps to install the same at <a href="https://nodejs.org/en/download/">https://nodejs.org/en/download/</a>. It would be best to install the 12.x LTS (Long Term Support) version.</p>
-              <p>NodeJS is a platform built on Chrome's JavaScript runtime for easily building fast and scalable network applications. You can learn more about NodeJS and its wonders at <a href="https://www.freecodecamp.org/news/what-exactly-is-node-js-ae36e97449f5/">https://www.freecodecamp.org/news/what-exactly-is-node-js-ae36e97449f5/</a></p>
+              <p>Ensure that you have a Github repository with a basic NodeJS webapp. For more information, check out <a href="blog-single-1.html">Create a website using NodeJS in 5 mins</a>.</p>
 
-              <h2 class="mb-3 mt-5">#3. Creating the webapp</h2>
-              <p>Create a folder and run the following command. Follow the steps to initialize the NodeJS webapp.</p>
-              <pre><code class="bash hljs">C:\sample>npm init
-This utility will walk you through creating a package.json file.
-It only covers the most common items, and tries to guess sensible defaults.
-
-See `npm help json` for definitive documentation on these fields
-and exactly what they do.
-
-Use `npm install <pkg>` afterwards to install a package and
-save it as a dependency in the package.json file.
-
-Press ^C at any time to quit.
-package name: (sample)
-version: (1.0.0)
-description:
-entry point: (index.js)
-test command:
-git repository:
-keywords:
-author:
-license: (ISC)
-About to write to C:\sample\package.json:
-
-{
-  "name": "sample",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "",
-  "license": "ISC"
-}
-
-
-Is this OK? (yes) yes</code></pre>
-              <p>Install express-generator, a web framework for NodeJS to setup a webapp quickly.</p>
-              <pre><code class="bash hljs">npm install -g express-generator</code></pre>
-              <p>Once the package is installed, run this command to view the help.</p>
-              <pre><code class="bash hljs">C:\sample>express -h
-
-Usage: express [options] [dir]
-
-Options:
-
-      --version        output the version number
-  -e, --ejs            add ejs engine support
-      --pug            add pug engine support
-      --hbs            add handlebars engine support
-  -H, --hogan          add hogan.js engine support
-  -v, --view <engine>  add view <engine> support (dust|ejs|hbs|hjs|jade|pug|twig|vash) (defaults to jade)
-      --no-view        use static html instead of view engine
-  -c, --css <engine>   add stylesheet <engine> support (less|stylus|compass|sass) (defaults to plain css)
-      --git            add .gitignore
-  -f, --force          force on non-empty directory
-  -h, --help           output usage information</code></pre>
-              <p>We would like to create a static website so run the following command to create a webapp without any view.</p>
-              <pre><code class="bash hljs">C:\sample>express --no-view</code></pre>
-              <p>Now install all the dependencies using the following command.</p>
-              <pre><code class="bash hljs">C:\sample>npm install</code></pre>
-              <h2 class="mb-3 mt-5">#4. Running the webapp</h2>
-              <p>To test if the webapp is setup correctly, run the following command.</p>
-              <pre><code class="bash hljs">C:\sample>npm start
-
-> sample@0.0.0 start C:\sample
-> node ./bin/www
-</code></pre>
-              <p>You can access your website using http://localhost:3000. The webapp can be accessed by anyone in the network using the url <b>http://{machine-name}:3000 or http://{IP-address}:3000</b>.</p>
+              <h2 class="mb-3 mt-5">#3. Creating an Azure free trial account</h2>
+              <p>Create an account on Azure at <a href="https://portal.azure.com/#home">https://portal.azure.com/#home</a>.</p>
+              <p>Once you create an account and login you'll see the following screen.</p>
               <p>
-                <img src="../images/blog1a.png" alt="" class="img-fluid">
+                <img src="../images/blog2a.png" alt="" class="img-fluid">
               </p>
-              <p>You can modify the html files and add your own content from the <b>./public/</b> folder in your workspace.</p>
+              <p>Click on "Start a free trial with Azure", follow the steps and activate the Azure free trial. You will be asked for credit card information but it will not deduct any amount unless you ugrade to a paid account.</p>
+
+              <h2 class="mb-3">#4. Creating the resource group and app service</h2>
+              <p>After you enable the free trial, come to the home page <a href="https://portal.azure.com/#home">https://portal.azure.com/#home</a> and click on create "App Serivces"</p>
+              <p>
+                <img src="../images/blog2b.png" alt="" class="img-fluid">
+              </p>
+              <p>Select the "Free Trial" subscription and click on "Create new" for the resource group. A resource group is a logical way to group all assets that belong together.</p>
+              <p>In our example we are creating a portfolio website. We will create a resource group "portfolio" and we will create our webapp, databases, monitoring tool, storage accounts etc related to my portfolio services within "portfolio" resource group.</p>
+              <p>
+                <img src="../images/blog2c.png" alt="" class="img-fluid">
+              </p>
+              <p>Once the resource group is created, select the runtime stack as Node 12 LTS, Publish as "Code", region as "West Europe" (since free tier is limited to few regions only).</p>
+              <p>App Service plan determines the memory, amount of compute allowed, pricing etc for the webapp. Click on "Create new" under App Service Plan and make sure to select <b>F1 tier under Dev/Test</b>.</p>
+              <p>
+                <img src="../images/blog2d.png" alt="" class="img-fluid">
+              </p> 
+              <p>Click on "Create + Review" and double check the configuration again.</p>
+              <p>
+                <img src="../images/blog2e.png" alt="" class="img-fluid">
+              </p> 
+              <p>Once the deployment is complete, you should be able to see two resources under your resource group, one for the webapp and one for the app service plan as follows.</p>
+              <p>
+                <img src="../images/blog2f.png" alt="" class="img-fluid">
+              </p>
+
+              <h2 class="mb-3">#5. Setting up CI/CD pipeline with Github</h2>
+              <p>Select your app service and click on "Deployment Center" on the side panel.</p>
+              <p>
+                <img src="../images/blog2g.png" alt="" class="img-fluid">
+              </p>
+              <p>Select "GitHub" for a continuous integration with a Github repo. It will currently say "Unauthorized", so select it and click on "Authorize" at the bottom.</p>
+              <p>Login in to your Github account from the pop-up and authorize Azure App Service for Github. Click on "Continue" once complete.</p>
+              <p>
+                <img src="../images/blog2h.png" alt="" class="img-fluid">
+              </p>
+              <p>Select "Github actions" as the build provider and click on "Continue".</p>
+              <p>
+                <img src="../images/blog2i.png" alt="" class="img-fluid">
+              </p>
+              <p>Select the organization, repo and branch. If it doesn't show up check Github -> Settings -> Applications -> Authorized OAuth Apps and check if Azure App Service is granted.</p>
+              <p>
+                <img src="../images/blog2j.png" alt="" class="img-fluid">
+              </p>
+              <p>
+                <img src="../images/blog2k.png" alt="" class="img-fluid">
+              </p>
+              <p>Review the configuration and click on "Finish".</p>
+              <p>Open Github and create/open <b>".github/workflows/master_{app_name}.yml"</b>. Ensure that the workflow file is as follows.</p>
+              <pre><code class="yml hljs">name: Build and deploy Node.js app to Azure Web App - allen-portfolio
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@master
+
+    - name: Set up Node.js version
+      uses: actions/setup-node@v1
+      with:
+        node-version: '12.x'
+
+    - name: npm install, build, and test
+      run: |
+        npm install
+        npm run build --if-present
+    - name: 'Deploy to Azure Web App'
+      uses: azure/webapps-deploy@v1
+      with:
+        app-name: 'allenphilip-portfolio'
+        publish-profile: ${{ secrets.AzureAppService_PublishProfile }}
+        package: .</code></pre>
+              <p>Secrets can be create from Github Repo -> Settings -> Secrets. Create a secret for publishProfile if it's not present.</p>
+              <p>
+                <img src="../images/blog2l.png" alt="" class="img-fluid">
+              </p>
+              <p>You can download the publishProfile for the app service from the Azure portal and copy-paste the contents of the file into the secret.</p>
+              <p>
+                <img src="../images/blog2m.png" alt="" class="img-fluid">
+              </p>
+              <p>Check the status of the Github action.</p>
+              <p>
+                <img src="../images/blog2n.png" alt="" class="img-fluid">
+              </p>
+              <p>Open the webapp from the url in app service Overview.</p>
+              <p>
+                <img src="../images/blog2o.png" alt="" class="img-fluid">
+              </p>
+              <p>
+                <img src="../images/blog2p.png" alt="" class="img-fluid">
+              </p>
+
               <div class="tag-widget post-tag-container mb-5 mt-5">
                 <div class="tagcloud">
                   <a href="#" class="tag-cloud-link">Tech</a>
-                  <a href="#" class="tag-cloud-link">NodeJS</a>
+                  <a href="#" class="tag-cloud-link">Cloud</a>
+                  <a href="#" class="tag-cloud-link">Azure</a>
                 </div>
               </div>
               
