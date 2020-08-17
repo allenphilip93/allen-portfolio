@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Create a website using NodeJS in 5 mins</title>
+    <title>Understanding peak finding algorithm</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel='icon' href='../images/favicon.ico' type='image/x-icon'/>
@@ -25,13 +25,21 @@
     <link rel="stylesheet" href="../css/flaticon.css">
     <link rel="stylesheet" href="../css/icomoon.css">
     <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="https://jmblog.github.io/color-themes-for-google-code-prettify/themes/github.css">
-    <link rel="stylesheet" href="https://jmblog.github.io/color-themes-for-google-code-prettify/themes/github.min.css">
 
     <link rel="stylesheet"
       href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/androidstudio.min.css">
     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js"></script>
     <script>hljs.initHighlightingOnLoad();</script>
+
+    <!-- Link to MathJax script from CDN -->
+    <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML-full"></script>
+    <!-- Configuration script -->
+    <script type="text/x-mathjax-config">
+      //Note the above <script> attribute type="text/x-mathjax-config" 
+      MathJax.Hub.Config({
+          tex2jax: {inlineMath: [["$","$"],["\\(","\\)"]]}
+      });
+    </script>
   </head>
   <body>
 
@@ -82,97 +90,98 @@
         	<div class="row justify-content-center mb-5 pb-5">
             <div class="col-md-7 text-center heading-section ftco-animate">
               <span>Blog</span>
-              <h2>Create a website using NodeJS in 5 mins</h2>
+              <h2>Understanding peak finding algorithm</h2>
             </div>
           </div>
           <div class="row d-flex justify-content-center">
             <div class="col-md-8">
-              <h2 class="mb-3">#1. What are web applications?</h2>
-              <p>In simple terms a Web Application (or webapp for short) is an application software made available on the web (internet). Any application that is running on a server and can be accessed over the web can be called a webapp.</p>
-              <p>For example, your company/school website, WhatApp, YouTube etc they're all webapps. In the context of this article we will be talking only about a static website which can be used as a portfolio website or a blog website etc.</p>
+              <h2 class="mb-3">#1. What is the problem statement?</h2>
+              <p>Consider a 1-D number array, $A$ of size $N$. An element $A[i]$ where $i \in [0, N-1]$ is a peak if and only if $$A[i-1] \le A[i] \ge A[i+1]$$ Assume that the boundaries $A[-1] = A[N] = -\infty$.</p>
+              <p>Goal is to find <b>a peak</b> in the input array if it exists.</p>
+
+              <h2 class="mb-3">#2. Will there always be a peak?</h2>
+              <p>Let's consider a few corner case examples starting with a constant value array like $A = [4,4,4,4]$. In this case all the 4 elements are value peaks since $A[i-1] = A[i] = A[i+1]$.</p>
+              <p>Now let's consider a monotonically increasing array like $A=[1,2,3,4]$. The last point is peak since $A[2] \le A[3]$.</p>
+              <p>Lastly let's looks at a monotonically decreasing array like $A=[4,3,2,1]$. The first point is peak since $A[0] \ge A[1]$.</p>
+              <p>We can conclude that yes there will always be a peak!</p>
               
-              <h2 class="mb-3 mt-5">#2. Prerequisites</h2>
-              <p>Ensure that you have NodeJS installed, if not you can find the steps to install the same at <a href="https://nodejs.org/en/download/">https://nodejs.org/en/download/</a>. It would be best to install the 12.x LTS (Long Term Support) version.</p>
-              <p>NodeJS is a platform built on Chrome's JavaScript runtime for easily building fast and scalable network applications. You can learn more about NodeJS and its wonders at <a href="https://www.freecodecamp.org/news/what-exactly-is-node-js-ae36e97449f5/">https://www.freecodecamp.org/news/what-exactly-is-node-js-ae36e97449f5/</a></p>
+              <h2 class="mb-3 mt-5">#3. Brute force approach</h2>
+              <p>The most simplest approach would be to iterate through the array from left to right and check if each element is an peak. And when we encounter the peak we break and return that index.</p>
+              <pre><code class="python hljs">if A[0] <= A[1]:
+  return 0
+if A[N-1] >= A[N-2]:
+  return N-1
+for i in range(1,N-1):
+  if A[i] >= A[i-1] and A[i] >= A[i+1]:
+    return i</code></pre>
+              <p>Another way to look at the problem would be to find the <b>global maxima</b> of the input array. But definition the global maxima would be greater than or equal to all other values in the array and hence a peak. But it's not efficient since it has to iterate through the whole array.</p>
+              <pre><code class="python hljs">m = 0
+for i in range(1,N):
+  if A[i] > A[m]:
+    m = i
+return m</code></pre>
+              
+              <h2 class="mb-3 mt-5">#4. Divide & Conquer</h2>
+              <p>We had stated earlier that given the boundary conditions there will always be a peak. Now if we slice the input array into two equal halves, when can we say that there will be peak in either of the halves?</p>
+              <p>Consider the left half, the boundary condition has changed wherein $A[0] = -\infty$ but $A[N/2]$ is finite. So we can be sure that there exists a peak if $A[N/2 - 1] \ge A[N/2]$.</p>
+              <p>Similarly for the right half, we can be certain that there exists a peak if $A[N/2 + 1] \ge A[N/2]$.</p>
+              <p>If $A[N/2] \ge A[N/2 - 1]$ and $A[N/2] \ge A[N/2 + 1]$, then $A[N/2]$ is a peak.</p>
+<pre><code class="python hljs">def findpeak(A, start, end):
+  mid = (start + end) / 2
+  if A[mid] >= A[mid-1] and A[mid] >= A[mid+1]:
+    return mid
+  else if A[mid-1] >= A[mid]:
+    return findpeak(A, 0, mid-1)
+  else:
+    return findpeak(A, mid+1, end)</code></pre>
 
-              <h2 class="mb-3 mt-5">#3. Creating the webapp</h2>
-              <p>Create a folder and run the following command. Follow the steps to initialize the NodeJS webapp.</p>
-              <pre><code class="bash hljs">C:\sample>npm init
-This utility will walk you through creating a package.json file.
-It only covers the most common items, and tries to guess sensible defaults.
+              <p>The runtime complexity now reduces to $O(\log_2(N))$ which is exponentially better than the previous $O(N)$.</p>
 
-See `npm help json` for definitive documentation on these fields
-and exactly what they do.
+              <h2 class="mb-3 mt-5">#5. Peak finding in 2-D</h2>
+              <p>Now let's slightly extend the problem statement as follows.</p>
+              <p>Consider a 2-D number array $A$ of size $m \times n$. $A[i][j]$ is a peak if and only if $$A[i][j] \ge A[i-1][j]$$ $$A[i][j] \ge A[i][j-1]$$ $$A[i][j] \ge A[i+1][j]$$ $$A[i][j] \ge A[i][j+1]$$</p>
+              <p>As with the 1-D case, consider all boundaries to be $-\infty$ which guarentees that there will be a peak.</p>
 
-Use `npm install <pkg>` afterwards to install a package and
-save it as a dependency in the package.json file.
+              <h2 class="mb-3 mt-5">#6. Divide & Conquer</h2>
+              <p>We can go for a brute force approach and find a peak with a runtime complexity of $O(m n)$ but we can do better with divide and conquer.</p>
+              <p>Let's split the array down the middle and consider two halves $A[:][0:n/2-1]$ and $A[:][n/2+1:n]$.</p>
+              <p>We will use the previous 1-D algorithm to find a peak along column $n/2$. If $A[x][n/2-1] \ge A[x][n/2]$, we could claim that left half $A[:][0:n/2-1]$ will have a peak. But does this claim hold true?</p>
+              <p>Consider this example,</p>
+              <p>$$\begin{bmatrix}
+                0 & 8 & 7 & 3 & 11\\
+                2 & 9 & 5 & 13 & 12\\
+                3 & 10 & 11 & 12 & 10
+                \end{bmatrix}$$</p>
+              <p>We will split along the third column, and the peak will be $A[0][2]$ which is $7$. Since $A[0][1] \ge A[0][2]$ we claim that there is a peak in the left half. But from the example it is clear that there is no peak in the left half, though there is a peak in the right half $A[1][3]$ of value $13$.</p>
+              
+              <h2 class="mb-3 mt-5">#7. Divide & Conquer - Correct Approach</h2>
+              <p>The previous approach fails because the boundary condition for $A[2][1]$ is not upheld, since $A[2][1] \le A[2][2]$. We should select the left half only if there is atleast one element, say $A[x][y]$, on column $n/2-1$ which is greater than all the elements on column $n/2$.</p>
+              <p>By induction, if any element on column $n/2-1$ is larger than $A[x][y]$ then it's larger than all elements on column $n/2$.</p>
+              <p>Also if $A[x][y]$ is the maxima on column $n/2-1$, then we can be certain there is a peak on row $x$.</p>
+              <p>The final pseudocode would look something like:</p>
+<pre><code class="python hljs">def findpeak(A, colStart, colEnd):
+  midCol = (colStart + colEnd) / 2
+  rowMax = findGlobalMaxima(A, midCol)
+  if A[rowMax][midCol] >= A[rowMax][midCol-1] and A[rowMax][midCol] >= A[rowMax][midCol+1]:
+    return rowMax,midCol
+  else if A[rowMax][midCol-1] >= A[rowMax][midCol]:
+    return findpeak(A, 0, midCol-1)
+  else:
+    return findpeak(A, midCol+1, colEnd)</code></pre>
+              <p>The runtime complexity for the same would be $O(m \log_2(n))$ since <i>findGlobalMaxima()</i> would take $O(m)$ before each split.</p>
 
-Press ^C at any time to quit.
-package name: (sample)
-version: (1.0.0)
-description:
-entry point: (index.js)
-test command:
-git repository:
-keywords:
-author:
-license: (ISC)
-About to write to C:\sample\package.json:
+              <h2 class="mb-3 mt-5">#8. Alternative approaches</h2>
+              <p>We could solve the above problem by either splitting row-wise or column-wise. So we could solve the same problem with a runtime complexity of $O(n \log_2 m)$ by splitting the array row-wise.</p>
+              <p>Another approach, albeit a less efficient one, is where we find the best possible neighbour from a starting point, say $(0,0)$. The best neighbour would be greater than the current element. We iteratively do this until we chance upon a case where we don't find a better neighbour in which case the current element is the peak. This has a runtime complexity of $O(m n)$.</p>
 
-{
-  "name": "sample",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "",
-  "license": "ISC"
-}
+              <h2 class="mb-3 mt-5">#9. Resources</h2>
+              <p><a href="https://www.youtube.com/watch?v=HtSuA80QTyo&list=PLUl4u3cNGP61Oq3tWYp6V_F-5jb5L2iHb&index=2&t=0s">YouTube MIT Lecture</a></p>
+              <p><a href="https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-006-introduction-to-algorithms-fall-2011/assignments/">Assignments & Sample Code</a></p>
 
-
-Is this OK? (yes) yes</code></pre>
-              <p>Install express-generator, a web framework for NodeJS to setup a webapp quickly.</p>
-              <pre><code class="bash hljs">npm install -g express-generator</code></pre>
-              <p>Once the package is installed, run this command to view the help.</p>
-              <pre><code class="bash hljs">C:\sample>express -h
-
-Usage: express [options] [dir]
-
-Options:
-
-      --version        output the version number
-  -e, --ejs            add ejs engine support
-      --pug            add pug engine support
-      --hbs            add handlebars engine support
-  -H, --hogan          add hogan.js engine support
-  -v, --view <engine>  add view <engine> support (dust|ejs|hbs|hjs|jade|pug|twig|vash) (defaults to jade)
-      --no-view        use static html instead of view engine
-  -c, --css <engine>   add stylesheet <engine> support (less|stylus|compass|sass) (defaults to plain css)
-      --git            add .gitignore
-  -f, --force          force on non-empty directory
-  -h, --help           output usage information</code></pre>
-              <p>We would like to create a static website so run the following command to create a webapp without any view.</p>
-              <pre><code class="bash hljs">C:\sample>express --no-view</code></pre>
-              <p>Now install all the dependencies using the following command.</p>
-              <pre><code class="bash hljs">C:\sample>npm install</code></pre>
-              <h2 class="mb-3 mt-5">#4. Running the webapp</h2>
-              <p>To test if the webapp is setup correctly, run the following command.</p>
-              <pre><code class="bash hljs">C:\sample>npm start
-
-> sample@0.0.0 start C:\sample
-> node ./bin/www
-</code></pre>
-              <p>You can access your website using http://localhost:3000. The webapp can be accessed by anyone in the network using the url <b>http://{machine-name}:3000 or http://{IP-address}:3000</b>.</p>
-              <p>
-                <img src="../images/blog1a.png" alt="" class="img-fluid">
-              </p>
-              <p>You can modify the html files and add your own content from the <b>./public/</b> folder in your workspace.</p>
               <div class="tag-widget post-tag-container mb-5 mt-5">
                 <div class="tagcloud">
-                  <a href="#" class="tag-cloud-link">Tech</a>
-                  <a href="#" class="tag-cloud-link">NodeJS</a>
+                  <a href="#" class="tag-cloud-link">Algorithm</a>
+                  <a href="#" class="tag-cloud-link">MIT Course</a>
                 </div>
               </div>
               

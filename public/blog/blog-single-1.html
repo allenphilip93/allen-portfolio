@@ -97,7 +97,7 @@
 
               <h2 class="mb-3 mt-5">#3. Creating the webapp</h2>
               <p>Create a folder and run the following command. Follow the steps to initialize the NodeJS webapp.</p>
-              <pre><code class="bash hljs">C:\sample>npm init
+              <pre><code class="shell hljs">C:\sample>npm init
 This utility will walk you through creating a package.json file.
 It only covers the most common items, and tries to guess sensible defaults.
 
@@ -134,9 +134,9 @@ About to write to C:\sample\package.json:
 
 Is this OK? (yes) yes</code></pre>
               <p>Install express-generator, a web framework for NodeJS to setup a webapp quickly.</p>
-              <pre><code class="bash hljs">npm install -g express-generator</code></pre>
+              <pre><code class="shell hljs">npm install -g express-generator</code></pre>
               <p>Once the package is installed, run this command to view the help.</p>
-              <pre><code class="bash hljs">C:\sample>express -h
+              <pre><code class="shell hljs">C:\sample>express -h
 
 Usage: express [options] [dir]
 
@@ -154,12 +154,12 @@ Options:
   -f, --force          force on non-empty directory
   -h, --help           output usage information</code></pre>
               <p>We would like to create a static website so run the following command to create a webapp without any view.</p>
-              <pre><code class="bash hljs">C:\sample>express --no-view</code></pre>
+              <pre><code class="shell hljs">C:\sample>express --no-view</code></pre>
               <p>Now install all the dependencies using the following command.</p>
-              <pre><code class="bash hljs">C:\sample>npm install</code></pre>
+              <pre><code class="shell hljs">C:\sample>npm install</code></pre>
               <h2 class="mb-3 mt-5">#4. Running the webapp</h2>
               <p>To test if the webapp is setup correctly, run the following command.</p>
-              <pre><code class="bash hljs">C:\sample>npm start
+              <pre><code class="shell hljs">C:\sample>npm start
 
 > sample@0.0.0 start C:\sample
 > node ./bin/www
