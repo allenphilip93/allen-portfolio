@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Create a website using NodeJS in 5 mins</title>
+    <title>MapReduce Explained</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel='icon' href='../images/favicon.ico' type='image/x-icon'/>
@@ -30,6 +30,16 @@
       href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/androidstudio.min.css">
     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js"></script>
     <script>hljs.initHighlightingOnLoad();</script>
+
+    <!-- Link to MathJax script from CDN -->
+    <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML-full"></script>
+    <!-- Configuration script -->
+    <script type="text/x-mathjax-config">
+      //Note the above <script> attribute type="text/x-mathjax-config" 
+      MathJax.Hub.Config({
+          tex2jax: {inlineMath: [["$","$"],["\\(","\\)"]]}
+      });
+    </script>
   </head>
   <body>
 
@@ -80,97 +90,116 @@
         	<div class="row justify-content-center mb-5 pb-5">
             <div class="col-md-7 text-center heading-section ftco-animate">
               <span>Blog</span>
-              <h2>Create a website using NodeJS in 5 mins</h2>
+              <h2>MapReduce Explained</h2>
             </div>
           </div>
           <div class="row d-flex justify-content-center">
             <div class="col-md-8">
-              <h2 class="mb-3">#1. What are web applications?</h2>
-              <p>In simple terms a Web Application (or webapp for short) is an application software made available on the web (internet). Any application that is running on a server and can be accessed over the web can be called a webapp.</p>
-              <p>For example, your company/school website, WhatApp, YouTube etc they're all webapps. In the context of this article we will be talking only about a static website which can be used as a portfolio website or a blog website etc.</p>
+              <h2 class="mb-3">#1. What is MapReduce?</h2>
+              <p>MapReduce is a programming model and an associated implementation for processing and generating large datasets.</p>
+              <p>MapReduce was first popularized by Jeffrey Dean & Sanjay Ghemawat of Google in 2004. In their paper, they discussed Google's approach to collecting and analysing the website data for search optimizations.</p>
+              <p>MapReduce could be used to do operations like counting the number of occurences of words to sorting of data in the orders of 10s of terabytes!</p>
               
-              <h2 class="mb-3 mt-5">#2. Prerequisites</h2>
-              <p>Ensure that you have NodeJS installed, if not you can find the steps to install the same at <a href="https://nodejs.org/en/download/">https://nodejs.org/en/download/</a>. It would be best to install the 12.x LTS (Long Term Support) version.</p>
-              <p>NodeJS is a platform built on Chrome's JavaScript runtime for easily building fast and scalable network applications. You can learn more about NodeJS and its wonders at <a href="https://www.freecodecamp.org/news/what-exactly-is-node-js-ae36e97449f5/">https://www.freecodecamp.org/news/what-exactly-is-node-js-ae36e97449f5/</a></p>
+              <h2 class="mb-3 mt-5">#2. Core Principles</h2>
+              <p>Given that the input file was often over 10 TB, any processing has to be distributed. Google wanted to make it easy to use for the application user and hence MapReduce had to be able to <b>express the computation while hiding the messy details of distributed computing</b>.</p>
+              <p>MapReduce <b>must be able to scale horizontally</b> in order to cope with the ever increase input sizes. In other words, throwing more servers at MapReduce must proportionally improve throughput.</p>
+              <p>Google realised that majority of the operations they needed to run on large datasets can be split into two steps.$$ map(key1, value1) \to list(key2, value2)$$ $$ reduce(key2, list(value2)) \to list(value2) $$</p>
+              
+              <h2 class="mb-3 mt-5">#3. Example for MapReduce</h2>
+              <p>Consider the problem of counting the number of occurrences of each word in a large collection of documents. The user would write code similar to the following pseudo-code:</p>
+<pre><code class="python hljs">def map(key, value):
+  # key: document name
+  # value: document contents
+  for each word w in value:
+    EmitIntermediate(w, "1");
 
-              <h2 class="mb-3 mt-5">#3. Creating the webapp</h2>
-              <p>Create a folder and run the following command. Follow the steps to initialize the NodeJS webapp.</p>
-              <pre><code class="bash hljs">C:\sample>npm init
-This utility will walk you through creating a package.json file.
-It only covers the most common items, and tries to guess sensible defaults.
+def reduce( key, values):
+  # key: a word
+  # values: a list of counts
+  int result = 0;
+  for each v in values:
+    result += ParseInt(v);
+    Emit(AsString(result));</code></pre>
+              <p>In this article, we will look at MapReduce in the context of this example.</p>
 
-See `npm help json` for definitive documentation on these fields
-and exactly what they do.
-
-Use `npm install <pkg>` afterwards to install a package and
-save it as a dependency in the package.json file.
-
-Press ^C at any time to quit.
-package name: (sample)
-version: (1.0.0)
-description:
-entry point: (index.js)
-test command:
-git repository:
-keywords:
-author:
-license: (ISC)
-About to write to C:\sample\package.json:
-
-{
-  "name": "sample",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "",
-  "license": "ISC"
-}
-
-
-Is this OK? (yes) yes</code></pre>
-              <p>Install express-generator, a web framework for NodeJS to setup a webapp quickly.</p>
-              <pre><code class="bash hljs">npm install -g express-generator</code></pre>
-              <p>Once the package is installed, run this command to view the help.</p>
-              <pre><code class="bash hljs">C:\sample>express -h
-
-Usage: express [options] [dir]
-
-Options:
-
-      --version        output the version number
-  -e, --ejs            add ejs engine support
-      --pug            add pug engine support
-      --hbs            add handlebars engine support
-  -H, --hogan          add hogan.js engine support
-  -v, --view <engine>  add view <engine> support (dust|ejs|hbs|hjs|jade|pug|twig|vash) (defaults to jade)
-      --no-view        use static html instead of view engine
-  -c, --css <engine>   add stylesheet <engine> support (less|stylus|compass|sass) (defaults to plain css)
-      --git            add .gitignore
-  -f, --force          force on non-empty directory
-  -h, --help           output usage information</code></pre>
-              <p>We would like to create a static website so run the following command to create a webapp without any view.</p>
-              <pre><code class="bash hljs">C:\sample>express --no-view</code></pre>
-              <p>Now install all the dependencies using the following command.</p>
-              <pre><code class="bash hljs">C:\sample>npm install</code></pre>
-              <h2 class="mb-3 mt-5">#4. Running the webapp</h2>
-              <p>To test if the webapp is setup correctly, run the following command.</p>
-              <pre><code class="bash hljs">C:\sample>npm start
-
-> sample@0.0.0 start C:\sample
-> node ./bin/www
-</code></pre>
-              <p>You can access your website using http://localhost:3000. The webapp can be accessed by anyone in the network using the url <b>http://{machine-name}:3000 or http://{IP-address}:3000</b>.</p>
+              <h2 class="mb-3 mt-5">#4. Execution Overview</h2>
               <p>
-                <img src="../images/blog1a.png" alt="" class="img-fluid">
+                <img src="../images/blog4a.png" alt="" class="img-fluid">
               </p>
-              <p>You can modify the html files and add your own content from the <b>./public/</b> folder in your workspace.</p>
+              <p>The user defined the MapReduce functions and starts the job.</p>
+              <h4 class="mb-3">#4.1. Splitting of input files</h4>
+              <p>First the input is split into M chucks of say around 16 MB. It then starts up many copies of the program on a cluster of machines, i.e, initializes and starts the nodes.</p>
+              <h4 class="mb-3">#4.2. Master Node</h4>
+              <p>One of the nodes in the cluster will be assigned as the master node and rest will serve as worker nodes. The master node maintains the state of all the worker nodes and assigns a Map or Reduce task to idle worker nodes.</p>
+              <p>Reduce invocations are distributed by partitioning the intermediate key space into $R$ pieces using a function like $hash(key) \bmod R$.</p>
+              <h4 class="mb-3">#4.3. Map Phase</h4>
+              <p>A worker node who has been assigned a Map task will read it's assigned input split. It parses the key-value pairs in it's split and applies the Map function. The intermediate key-value pairs produced by the Map function will be buffered in memory.</p>
+              <h4 class="mb-3">#4.4. Writing intermediate data</h4>
+              <p>Periodically the intermediate keys in memory are written into local disk, partitioned into $R$ regions by the partitioning function.</p>
+              <p>The location of these buffered pairs on the local disk of the worker node is passed back to the master.</p>
+              <h4 class="mb-3">#4.5. Reading intermediate data</h4>
+              <p>After the Map phase completes, the Reduce workers are notified of the relevant locations. The Reduce worker node uses RPC to read the buffered data from the local disks and sorts it by the intermediate keys so that all occurences of the same key are grouped together.</p>
+              <h4 class="mb-3">#4.6. Reduce Phase</h4>
+              <p>Once the sorted intermediate key-value pairs are available at the Reduce worker node, it applies the Reduce function on all the key-value pairs and stores the output in the final output file.</p>
+
+              <h2 class="mb-3 mt-5">#5. Concerns with MapReduce</h2>
+              <p>In order to extract the best throughput out of MapReduce few important factors need to be kept in mind. Every distributed system has its own inadequacies and MapReduce is no different.</p>
+              <h4 class="mb-3">#5.1. Fault Tolerance</h4>
+              <p>The larger the node cluster, the larger the chances of failure. The master node periodically pings the worker nodes to check the health.</p>
+              <p>In the event a worker node fails, any tasks completed on the failed node will be re-executed since the output is stored on local disk.</p>
+              <p>All the Reduce worker nodes are notified to read from the active worker node instead of the failed worker node.</p>
+              <p>Though the master node can be checkpointed and restarted in case of failure, Google's MapReduce implementation fails if the master node fails which is unlikely.</p>
+              <h4 class="mb-3">#5.2. Network Bandwidth</h4>
+              <p>In 2004, network bandwidth was relatively a scarce resource. Bandwidth can be conserved by taking advantage of the fact that the input data residing on GFS is stored on the local disks that make up the cluster for MapReduce.</p>
+              <p>GFS divides files into 64MB chunks and creates about 3 copies across different machines. The master node takes this information to schedule map tasks to maximize local reads instead of remote reads.</p>
+              <p>Reduce invocations are distributed by partitioning the intermediate key space into $R$ pieces using a function like $hash(key) \bmod R$.</p>
+              <h4 class="mb-3">#5.3. Task Granularity</h4>
+              <p>We subdivide the map phase into $M$ pieces and reduce phase into $R$ pieces. Ideally $M$ and $R$ must be much larger than the number of machines in the cluster.</p>
+              <p>Also there are practical bounds on how large $M$ and $R$ can be. Master node make $O(M+N)$ scheduling decisions and keeps $O(MN)$ state in memory.</p>
+              <h4 class="mb-3">#5.4. Backup Tasks</h4>
+              <p>One of the common causes that lengthens the total time taken for a MapReduce operation is a “straggler”: a machine that takes an unusually long time to complete one of the last few map or reduce tasks in the computation.</p>
+              <p>When a MapReduce operation is close to completion, the master schedules backup executions of the remaining in-progress tasks. The task is marked as completed whenever either the primary or the backup execution completes.</p>
+              
+              <h2 class="mb-3 mt-5">#6. Performance Metrics</h2>
+              <p>
+                <img src="../images/blog4b.png" alt="" class="img-fluid">
+              </p>
+              <p>The figure illustrated the data transfer rates over time for different executions of the sort program. The sort program sorts $10^{10}$ 100-byte records (approximately 1 terabyte of data).</p>
+              <h4 class="mb-3">#6.1. Normal Execution</h4>
+              <p>Figure(a) shows the progress of a normal execution of the sort program. The top-left graph shows the rate at which input is read. The rate peaks at about 13 GB/s and dies off fairly quickly since all map tasks finish before 200 seconds have elapsed.</p>
+              <p>The middle-left graph shows the rate at which data is sent over the network from the map tasks to the reduce tasks. This shuffling starts as soon as the first map task completes</p>
+              <p>The first hump in the graph is for the first batch of approximately 1700 reduce tasks. Roughly 300 seconds into the computation, some of these first batch of reduce tasks finish and it starts shuffling data for the remaining reduce tasks.</p>
+              <p>The bottom-left graph shows the rate at which sorted data is written to the final output files by the reduce tasks. Including startup overhead, the entire  computation takes 891 seconds.</p>
+              <p>The input rate is higher than the shuffle rate and the output rate because of our locality optimization. The shuffle rate is higher than the output rate because the output phase writes two copies of the sorted data for replication & availablity.</p>
+              <h4 class="mb-3">#6.2. No Backup Tasks</h4>
+              <p>Figure(b) shows an execution of the sort program with backup tasks disabled. The execution flow is similar to that shown in Figure(a), except that there is a very long tail where hardly any write activity occurs.</p>
+              <p>The last few stragglers don’t finish until 300 seconds later. The entire computation takes 1283 seconds, an increase of 44% in elapsed time.</p>
+              <h4 class="mb-3">#6.3. 200 Tasks Killed</h4>
+              <p>Figure(c) shows an execution of the sort program where they intentionally killed 200 out of 1746 worker processes several minutes into the computation. </p>
+              <p>The worker deaths show up as a negative input rate since some previously completed map work disappears and needs to be redone.</p>
+              <p>The entire computation finishes in 933 seconds including startup overhead (just an increase of 5% over the normal execution time).</p>
+              
+              <h2 class="mb-3 mt-5">#7. Other applications of MapReduce</h2>
+              <p>It has been used across a wide range of domains within
+                Google, including:
+                <ul>
+                  <li>large-scale machine learning problems</li>
+                  <li>clustering problems for the Google News and Froogle products</li>
+                  <li>extraction of data used to produce reports of popular queries (e.g. Google Zeitgeist)</li>
+                  <li>extraction of properties of web pages for new experiments and products (e.g. extraction of geographical locations from a large corpus of web pages for localized search)</li>
+                  <li>large-scale graph computations</li>
+                </ul>
+              </p>
+              
+              <h2 class="mb-3 mt-5">#8. Resources</h2>
+              <p><a href="https://www.youtube.com/watch?v=cQP8WApzIQQ&list=PLrw6a1wE39_tb2fErI4-WkMbsvGQk9_UB&index=2&t=0s">YouTube MIT Lecture</a></p>
+              <p><a href="https://static.googleusercontent.com/media/research.google.com/en//archive/mapreduce-osdi04.pdf">MapReduce Paper</a></p>
+
               <div class="tag-widget post-tag-container mb-5 mt-5">
                 <div class="tagcloud">
-                  <a href="#" class="tag-cloud-link">Tech</a>
-                  <a href="#" class="tag-cloud-link">NodeJS</a>
+                  <a href="#" class="tag-cloud-link">Algorithms</a>
+                  <a href="#" class="tag-cloud-link">System Design</a>
+                  <a href="#" class="tag-cloud-link">MIT Course</a>
                 </div>
               </div>
               
