@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Create a website using NodeJS in 5 mins</title>
+    <title>Newton's method for finding roots</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel='icon' href='../images/favicon.ico' type='image/x-icon'/>
@@ -30,6 +30,17 @@
       href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/androidstudio.min.css">
     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js"></script>
     <script>hljs.initHighlightingOnLoad();</script>
+
+    <!-- Link to MathJax script from CDN -->
+    <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML-full"></script>
+    <!-- Configuration script -->
+    <script type="text/x-mathjax-config">
+      //Note the above <script> attribute type="text/x-mathjax-config" 
+      MathJax.Hub.Config({
+          TeX: { equationNumbers: {autoNumber: "AMS"} },
+          tex2jax: {inlineMath: [["$","$"],["\\(","\\)"]]}
+      });
+    </script>
   </head>
   <body>
 
@@ -80,97 +91,68 @@
         	<div class="row justify-content-center mb-5 pb-5">
             <div class="col-md-7 text-center heading-section ftco-animate">
               <span>Blog</span>
-              <h2>Create a website using NodeJS in 5 mins</h2>
+              <h2>Newton's method for finding roots</h2>
             </div>
           </div>
           <div class="row d-flex justify-content-center">
             <div class="col-md-8">
-              <h2 class="mb-3">#1. What are web applications?</h2>
-              <p>In simple terms a Web Application (or webapp for short) is an application software made available on the web (internet). Any application that is running on a server and can be accessed over the web can be called a webapp.</p>
-              <p>For example, your company/school website, WhatApp, YouTube etc they're all webapps. In the context of this article we will be talking only about a static website which can be used as a portfolio website or a blog website etc.</p>
+              <h2 class="mb-3">#1. What is the problem statement?</h2>
+              <p>Given the following equation $$f(x)=0$$ we want to find the roots of the equation, i.e for what values of $x$ the function $f(x)$ goes to $0$. We assume that $f(x)$ is continuous and differentiable and a root exists.</p>
               
-              <h2 class="mb-3 mt-5">#2. Prerequisites</h2>
-              <p>Ensure that you have NodeJS installed, if not you can find the steps to install the same at <a href="https://nodejs.org/en/download/">https://nodejs.org/en/download/</a>. It would be best to install the 12.x LTS (Long Term Support) version.</p>
-              <p>NodeJS is a platform built on Chrome's JavaScript runtime for easily building fast and scalable network applications. You can learn more about NodeJS and its wonders at <a href="https://www.freecodecamp.org/news/what-exactly-is-node-js-ae36e97449f5/">https://www.freecodecamp.org/news/what-exactly-is-node-js-ae36e97449f5/</a></p>
+              <h2 class="mb-3">#2. Newton's method</h2>
+              <p>In 1664, Issac Newton came up with an iterative method to solve this problem. However, this method is sometimes also known as the Raphson's method since Raphson invented the same algorithm a few years after Newton published it.</p>
+              <p>The input to Newton's method takes in the function $f(x)$ as well as initial approximate guess $x_i$ for the root.</p>
+              <p>Newton's method attempts to iteratively to improve the guess. According to the method, the next guess $x_{i+1}$ would be $$x_{i+1} = x_i - \frac{f(x_i)}{f'(x_i)} $$</p>
+              <p>We iteratively repeat this until $f(x_{i+1}) \approx 0$</p>
+              <p>The next guess $x_{i+1}$ is computed by drawing a tangent to the function $f(x)$ at ${x_i}$ and the point where the tangent intersects with the X-axis will be $x_{i+1}$.</p>
 
-              <h2 class="mb-3 mt-5">#3. Creating the webapp</h2>
-              <p>Create a folder and run the following command. Follow the steps to initialize the NodeJS webapp.</p>
-              <pre><code class="bash hljs">C:\sample>npm init
-This utility will walk you through creating a package.json file.
-It only covers the most common items, and tries to guess sensible defaults.
-
-See `npm help json` for definitive documentation on these fields
-and exactly what they do.
-
-Use `npm install <pkg>` afterwards to install a package and
-save it as a dependency in the package.json file.
-
-Press ^C at any time to quit.
-package name: (sample)
-version: (1.0.0)
-description:
-entry point: (index.js)
-test command:
-git repository:
-keywords:
-author:
-license: (ISC)
-About to write to C:\sample\package.json:
-
-{
-  "name": "sample",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "",
-  "license": "ISC"
-}
+              <h2 class="mb-3">#3. Mathematics behind Newton's method</h2>
+              <p>We know that the equation of a line is $$ \begin{equation} y = mx + c \end{equation} $$</p>
+              <p>Let's say that our starting guess is $x_i$. The slope at $x_i$ on $f(x)$ will be the differential at $x_i$ which is $f'(x_i)$. Also we know that $(x_i, f(x_i)$ lies on the line, so we can substitute the point into $(1)$.</p>
+              <p>$$f(x_i) = x_i f'(x_i) + c $$ Rearranging the terms we get: $$ c = f(x_i) - x_i f'(x_i) $$ Equation $(1)$ now becomes: $$ \begin{equation} y = x f'(x_i) + f(x_i) - x_i f'(x_i) \end{equation} $$</p>
+              <p>Now we know that when this line intersects the X-axis, $y=0$ and let's say $x = x_{i+1}$ Substituting this into equation $(2)$ we get: $$ 0 = x_{i+1} f'(x_i) + f(x_i) - x_i f'(x_i) $$ $$ \begin{equation} x_{i+1} = x_i - \frac{f(x_i)}{f'(x_i)} \end{equation} $$ </p>
 
 
-Is this OK? (yes) yes</code></pre>
-              <p>Install express-generator, a web framework for NodeJS to setup a webapp quickly.</p>
-              <pre><code class="bash hljs">npm install -g express-generator</code></pre>
-              <p>Once the package is installed, run this command to view the help.</p>
-              <pre><code class="bash hljs">C:\sample>express -h
+              <h2 class="mb-3">#4. Example using Newton's method</h2>
+              <p>Consider a quadratic function $$ f(x) = x^2 - 4 $$ We know that $$ f'(x) = 2x $$ Substitute the values into equation (3) $$ \begin{equation} x_{i+1} = x_i - \frac{x_i^2 - 4}{2 x_i} \end{equation} $$ Let's say $x_0 = 1$. After the first iteration $$ x_1 = 2.5 $$ It's quite clear we have overshot the root at $x=2$. So let's see what will the guess after one more iteration but substituting $x_1 = 2.5$ into equation (4) $$ x_2 = 2.05 $$ Values for the next few iterations look like $$ x_3 = 2.000609756097561 $$ $$ x_4 = 2.0000000929222947 $$ </p>
 
-Usage: express [options] [dir]
+              <h2 class="mb-3">#5. Does Newton's method always converge?</h2>
+              <p>We can observe from the above example for quadratic functions, newton's method converges as long as a root exists since the second order derivative is constant. This means our approximation gets better with each iteration.</p>
+              <p>Wiki has a more formal proof on the <a href="https://en.wikipedia.org/wiki/Newton%27s_method#Proof_of_quadratic_convergence_for_Newton%27s_iterative_method">quadratic convergence of Newton's method</a>.</p>
+              <p>But more higher order functions like say a cubic function, <a href="https://math.stackexchange.com/questions/2407659/why-does-the-newton-raphson-method-not-converge-for-some-functions/2407690#:~:text=8%20Answers&text=Newton%27s%20method%20does%20not%20always,can%20have%20highly%20nontrivial%20dynamics.">convergence is not guarenteed</a> since based on the starting point of the guess and the other local peaks, it might end up <a href="https://www.wolframalpha.com/input/?i=Use+Newton%27s+method+to+solve+-0.74+%2B+0.78*x+%2B+1.1*x%5E2+-+3.55*x%5E3+%3D+0+with+x0+%3D+0.54">oscillating indefinitely and never find a solution</a>.</p>
 
-Options:
+              <h2 class="mb-3">#6. Applications of Newton's method</h2>
+              <p>The more direct implementation is in finding the square root of a rational number within a certain error.</p>
+              <pre><code class="java hljs">double sqrt_newton(double n) {
+  const double eps = 1E-15;
+  double x = 1;
+  for (;;) {
+      double nx = (x + n / x) / 2;
+      if (abs(x - nx) < eps)
+          break;
+      x = nx;
+  }
+  return x;
+}</code></pre>
+              <p>Another variant is when we want to find the integer root of a number. Finding the large $x$ such that $x^2 \le n$.</p>
+              <pre><code class="java hljs">int isqrt_newton(int n) {
+  int x = 1;
+  bool decreased = false;
+  for (;;) {
+      int nx = (x + n / x) >> 1;
+      if (x == nx || nx > x && decreased)
+          break;
+      decreased = nx < x;
+      x = nx;
+  }
+  return x;
+}</code></pre>
+              <p>For calculating square root of large numbers it is simple and effective to take the initial guess as $ 2 ^ {nbits/2} $ where $ nbits $ is the number of bits in the number $ N $.</p>
 
-      --version        output the version number
-  -e, --ejs            add ejs engine support
-      --pug            add pug engine support
-      --hbs            add handlebars engine support
-  -H, --hogan          add hogan.js engine support
-  -v, --view <engine>  add view <engine> support (dust|ejs|hbs|hjs|jade|pug|twig|vash) (defaults to jade)
-      --no-view        use static html instead of view engine
-  -c, --css <engine>   add stylesheet <engine> support (less|stylus|compass|sass) (defaults to plain css)
-      --git            add .gitignore
-  -f, --force          force on non-empty directory
-  -h, --help           output usage information</code></pre>
-              <p>We would like to create a static website so run the following command to create a webapp without any view.</p>
-              <pre><code class="bash hljs">C:\sample>express --no-view</code></pre>
-              <p>Now install all the dependencies using the following command.</p>
-              <pre><code class="bash hljs">C:\sample>npm install</code></pre>
-              <h2 class="mb-3 mt-5">#4. Running the webapp</h2>
-              <p>To test if the webapp is setup correctly, run the following command.</p>
-              <pre><code class="bash hljs">C:\sample>npm start
-
-> sample@0.0.0 start C:\sample
-> node ./bin/www
-</code></pre>
-              <p>You can access your website using http://localhost:3000. The webapp can be accessed by anyone in the network using the url <b>http://{machine-name}:3000 or http://{IP-address}:3000</b>.</p>
-              <p>
-                <img src="../images/blog1a.png" alt="" class="img-fluid">
-              </p>
-              <p>You can modify the html files and add your own content from the <b>./public/</b> folder in your workspace.</p>
               <div class="tag-widget post-tag-container mb-5 mt-5">
                 <div class="tagcloud">
-                  <a href="#" class="tag-cloud-link">Tech</a>
-                  <a href="#" class="tag-cloud-link">NodeJS</a>
+                  <a href="#" class="tag-cloud-link">Math</a>
+                  <a href="#" class="tag-cloud-link">Algorithm</a>
                 </div>
               </div>
               
