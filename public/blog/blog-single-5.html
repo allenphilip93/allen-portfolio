@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Create a website using NodeJS in 5 mins</title>
+    <title>Create your own podcast on Spotify for free</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel='icon' href='../images/favicon.ico' type='image/x-icon'/>
@@ -80,93 +80,94 @@
         	<div class="row justify-content-center mb-5 pb-5">
             <div class="col-md-7 text-center heading-section ftco-animate">
               <span>Blog</span>
-              <h2>Create a website using NodeJS in 5 mins</h2>
+              <h2>Create your own podcast on Spotify for free</h2>
             </div>
           </div>
           <div class="row d-flex justify-content-center">
             <div class="col-md-8">
-              <h2 class="mb-3">#1. What are web applications?</h2>
-              <p>In simple terms a Web Application (or webapp for short) is an application software made available on the web (internet). Any application that is running on a server and can be accessed over the web can be called a webapp.</p>
-              <p>For example, your company/school website, WhatApp, YouTube etc they're all webapps. In the context of this article we will be talking only about a static website which can be used as a portfolio website or a blog website etc.</p>
+              <h2 class="mb-3">#1. What is a podcast?</h2>
+              <p>A podcast is an audio programme like talk shows we hear on the radio except this is on the web in an episodic format. There are podcasts for pretty much every genre under the sun, from music and arts to science, history & computer science.</p>
               
-              <h2 class="mb-3 mt-5">#2. Prerequisites</h2>
-              <p>Ensure that you have NodeJS installed, if not you can find the steps to install the same at <a href="https://nodejs.org/en/download/">https://nodejs.org/en/download/</a>. It would be best to install the 12.x LTS (Long Term Support) version.</p>
-              <p>NodeJS is a platform built on Chrome's JavaScript runtime for easily building fast and scalable network applications. You can learn more about NodeJS and its wonders at <a href="https://www.freecodecamp.org/news/what-exactly-is-node-js-ae36e97449f5/">https://www.freecodecamp.org/news/what-exactly-is-node-js-ae36e97449f5/</a></p>
+              <h2 class="mb-3 mt-5">#2. Why create a podcast?</h2>
+              <p>Podcasts are a great medium to reach out to people all across the world, share your knowledge, inspire and move others with your words and stories. Alternatively it could also be a nice way to work on your communication skills as a hobby. Podcasts are also used to promote oneself or your products to a very niche audience.</p>
 
-              <h2 class="mb-3 mt-5">#3. Creating the webapp</h2>
-              <p>Create a folder and run the following command. Follow the steps to initialize the NodeJS webapp.</p>
-              <pre><code class="bash hljs">C:\sample>npm init
-This utility will walk you through creating a package.json file.
-It only covers the most common items, and tries to guess sensible defaults.
+              <h2 class="mb-3 mt-5">#3. Hosting provider & RSS feed</h2>
+              <p>It is absolutely free to register your podcast with Spotify, Google Podcast & iTunes. But they all do need a RSS feed which means we need a hosting provider to store our episodes and make them available by RSS feeds.</p>
+              <p>Whenever you upload a new episode to the hosting provider, all the subscribers of your RSS feed will be notified of the new episode and people will be able to view your episode on Spotify, iTunes etc.</p>
 
-See `npm help json` for definitive documentation on these fields
-and exactly what they do.
-
-Use `npm install <pkg>` afterwards to install a package and
-save it as a dependency in the package.json file.
-
-Press ^C at any time to quit.
-package name: (sample)
-version: (1.0.0)
-description:
-entry point: (index.js)
-test command:
-git repository:
-keywords:
-author:
-license: (ISC)
-About to write to C:\sample\package.json:
-
-{
-  "name": "sample",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "",
-  "license": "ISC"
-}
-
-
-Is this OK? (yes) yes</code></pre>
-              <p>Install express-generator, a web framework for NodeJS to setup a webapp quickly.</p>
-              <pre><code class="bash hljs">npm install -g express-generator</code></pre>
-              <p>Once the package is installed, run this command to view the help.</p>
-              <pre><code class="bash hljs">C:\sample>express -h
-
-Usage: express [options] [dir]
-
-Options:
-
-      --version        output the version number
-  -e, --ejs            add ejs engine support
-      --pug            add pug engine support
-      --hbs            add handlebars engine support
-  -H, --hogan          add hogan.js engine support
-  -v, --view <engine>  add view <engine> support (dust|ejs|hbs|hjs|jade|pug|twig|vash) (defaults to jade)
-      --no-view        use static html instead of view engine
-  -c, --css <engine>   add stylesheet <engine> support (less|stylus|compass|sass) (defaults to plain css)
-      --git            add .gitignore
-  -f, --force          force on non-empty directory
-  -h, --help           output usage information</code></pre>
-              <p>We would like to create a static website so run the following command to create a webapp without any view.</p>
-              <pre><code class="bash hljs">C:\sample>express --no-view</code></pre>
-              <p>Now install all the dependencies using the following command.</p>
-              <pre><code class="bash hljs">C:\sample>npm install</code></pre>
-              <h2 class="mb-3 mt-5">#4. Running the webapp</h2>
-              <p>To test if the webapp is setup correctly, run the following command.</p>
-              <pre><code class="bash hljs">C:\sample>npm start
-
-> sample@0.0.0 start C:\sample
-> node ./bin/www
-</code></pre>
-              <p>You can access your website using http://localhost:3000. The webapp can be accessed by anyone in the network using the url <b>http://{machine-name}:3000 or http://{IP-address}:3000</b>.</p>
+              <h2 class="mb-3 mt-5">#4. Creating a RSS feed with SoundCloud</h2>
+              <p>There may be better hosting providers out there but in this article we will use SoundCloud because it's simple and free which is great price.</p>
+              <p>Create a free account with SoundCloud and open up the Settings page.</p>
               <p>
-                <img src="../images/blog1a.png" alt="" class="img-fluid">
+                <img src="../images/blog5a.png" alt="" class="img-fluid">
               </p>
-              <p>You can modify the html files and add your own content from the <b>./public/</b> folder in your workspace.</p>
+              <p>As you can see, there is already a RSS feed associated with your free account. Just fill in the other information. Make sure you verify your SoundCloud account before proceeding.</p>
+              <p>
+                <img src="../images/blog5b.png" alt="" class="img-fluid">
+              </p>
+
+              <h2 class="mb-3 mt-5">#5. Setting up the Spotify account</h2>
+              <p>Let's go ahead and create a podcast on Spotify with our SoundCloud RSS feed. Create a free account with Spotify and open up Spotify for Podcasters.</p>
+              <p>
+                <img src="../images/blog5c.png" alt="" class="img-fluid">
+              </p>
+              <p>Click on "Get Started" and enter your RSS feed link. Most likely you'll end up with the same error.</p>
+              <p>
+                <img src="../images/blog5d.png" alt="" class="img-fluid">
+              </p>
+              <p>In order to create a podcast, ensure that the prerequisites are completed
+                <ul>
+                  <li>Verify your email address with SoundCloud</li>
+                  <li>Upload atleast one episode</li>
+                </ul>
+              </p>
+              <p>Also podcast service providers like Spotify, iTunes has a size requirement on the profile photo like atleast 1000x1000 but not more than 1400x1400. So upload an appropriate podcast label pic.</p>
+              <p>
+                <img src="../images/blog5e.png" alt="" class="img-fluid">
+              </p>
+              <p>
+                <img src="../images/blog5f.png" alt="" class="img-fluid">
+              </p>
+
+              <h2 class="mb-3 mt-5">#6. Creating your first episode</h2>
+              <p>Create a sample into file in any of the common formats like .mp3, .m4a etc using even a basic voice recording app. Alternatively you can use something like <a href="https://www.audacityteam.org/">Audacity</a>.</p>
+              <p>Open SoundCloud and click on the "Upload" tab and upload your first episode.</p>
+              <p>
+                <img src="../images/blog5g.png" alt="" class="img-fluid">
+              </p>
+              <p>Add the basic information for the track.</p>
+              <p>
+                <img src="../images/blog5h.png" alt="" class="img-fluid">
+              </p>
+              
+              <h2 class="mb-3 mt-5">#7. Register your RSS feed as a podcast with Spotify</h2>
+              <p>Let's go back to Spotify for Podcasters and attempt to create a podcast again. Now you should see something like this.</p>
+              <p>
+                <img src="../images/blog5i.png" alt="" class="img-fluid">
+              </p>
+              <p>Verify your email address in the next step and enter the verification code. In the next step add the basic podcast info.</p>
+              <p>
+                <img src="../images/blog5j.png" alt="" class="img-fluid">
+              </p>
+              <p>There you go, your podcast is ready!</p>
+              <p>
+                <img src="../images/blog5k.png" alt="" class="img-fluid">
+              </p>
+
+              <h2 class="mb-3 mt-5">#8. Viewing & sharing your podcast</h2>
+              <p>Check back in about an hour and your see a page like this.</p>
+              <p>
+                <img src="../images/blog5l.png" alt="" class="img-fluid">
+              </p>
+              <p>Open up the details tab, and copy the spotify link to your podcast.</p>
+              <p>
+                <img src="../images/blog5m.png" alt="" class="img-fluid">
+              </p>
+              <p>You can share this link and open it on your mobile or laptop. You should be able to view your podcast on Spotify now.</p>
+              <p>
+                <img src="../images/blog5n.png" alt="" class="img-fluid">
+              </p>
+
               <div class="tag-widget post-tag-container mb-5 mt-5">
                 <div class="tagcloud">
                   <a href="#" class="tag-cloud-link">Tech</a>
