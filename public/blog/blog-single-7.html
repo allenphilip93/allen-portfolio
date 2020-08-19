@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Syntax highlighting & Mathematical markup in HTML</title>
+    <title>Create a website using NodeJS in 5 mins</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel='icon' href='../images/favicon.ico' type='image/x-icon'/>
@@ -30,16 +30,6 @@
       href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/androidstudio.min.css">
     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-
-    <!-- Link to MathJax script from CDN -->
-    <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML-full"></script>
-    <!-- Configuration script -->
-    <script type="text/x-mathjax-config">
-      //Note the above <script> attribute type="text/x-mathjax-config" 
-      MathJax.Hub.Config({
-          tex2jax: {inlineMath: [["$","$"],["\\(","\\)"]]}
-      });
-    </script>
   </head>
   <body>
 
@@ -90,80 +80,97 @@
         	<div class="row justify-content-center mb-5 pb-5">
             <div class="col-md-7 text-center heading-section ftco-animate">
               <span>Blog</span>
-              <h2>Syntax highlighting & Mathematical markup in HTML</h2>
+              <h2>Create a website using NodeJS in 5 mins</h2>
             </div>
           </div>
           <div class="row d-flex justify-content-center">
             <div class="col-md-8">
-              <h2 class="mb-3">#1. Why do I need syntax highlighting?</h2>
-              <p>Syntax highlighting of "code" blocks in a HTML is useful if say you want to create a blog on a programming language and you would like to convey to the readers the code clearly.</p>
-              <p>Syntax highlighting in HTML is super simple and improves the overall readability of the page content.</p>
+              <h2 class="mb-3">#1. What are web applications?</h2>
+              <p>In simple terms a Web Application (or webapp for short) is an application software made available on the web (internet). Any application that is running on a server and can be accessed over the web can be called a webapp.</p>
+              <p>For example, your company/school website, WhatApp, YouTube etc they're all webapps. In the context of this article we will be talking only about a static website which can be used as a portfolio website or a blog website etc.</p>
               
-              <h2 class="mb-3 mt-5">#2. HighlightJS</h2>
-              <p>Though there are a number of solutions available, in my experience the simplest one which gets the job done is highlightJS.</p>
-              <p><a href="https://highlightjs.org/">HighlightJS</a> is a simple syntax highlighting javascript library.</p>
-              <p>To add syntax highlighting on your webpage, add this code within the head tag.</p>
-              <pre><code class="html hljs">&lt;link rel=&quot;stylesheet&quot; href=&quot;//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/androidstudio.min.css&quot;&gt;
-&lt;script src=&quot;//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min.js&quot;&gt;&lt;/script&gt;
-&lt;script&gt;hljs.initHighlightingOnLoad();&lt;/script&gt;
-              </code></pre>
-              <p>First we load up the CSS & JS script for highlightJS, next we initialize them so they can be used.</p>
-              <p>To add syntax highlighting to the following python code snippet, the html code will be:</p>
-              <pre><code class="html hljs">&lt;pre&gt;&lt;code class=&quot;python hljs&quot;&gt;def map(key, value):
-  # key: document name
-  # value: document contents
-  for each word w in value:
-    EmitIntermediate(w, &quot;1&quot;);
+              <h2 class="mb-3 mt-5">#2. Prerequisites</h2>
+              <p>Ensure that you have NodeJS installed, if not you can find the steps to install the same at <a href="https://nodejs.org/en/download/">https://nodejs.org/en/download/</a>. It would be best to install the 12.x LTS (Long Term Support) version.</p>
+              <p>NodeJS is a platform built on Chrome's JavaScript runtime for easily building fast and scalable network applications. You can learn more about NodeJS and its wonders at <a href="https://www.freecodecamp.org/news/what-exactly-is-node-js-ae36e97449f5/">https://www.freecodecamp.org/news/what-exactly-is-node-js-ae36e97449f5/</a></p>
 
-def reduce( key, values):
-  # key: a word
-  # values: a list of counts
-  int result = 0;
-  for each v in values:
-    result += ParseInt(v);
-    Emit(AsString(result));&lt;/code&gt;&lt;/pre&gt;</code></pre>
-              <p>The result would look something like this:</p>
-<pre><code class="python hljs">def map(key, value):
-  # key: document name
-  # value: document contents
-  for each word w in value:
-    EmitIntermediate(w, "1");
+              <h2 class="mb-3 mt-5">#3. Creating the webapp</h2>
+              <p>Create a folder and run the following command. Follow the steps to initialize the NodeJS webapp.</p>
+              <pre><code class="bash hljs">C:\sample>npm init
+This utility will walk you through creating a package.json file.
+It only covers the most common items, and tries to guess sensible defaults.
 
-def reduce( key, values):
-  # key: a word
-  # values: a list of counts
-  int result = 0;
-  for each v in values:
-    result += ParseInt(v);
-    Emit(AsString(result));</code></pre>
+See `npm help json` for definitive documentation on these fields
+and exactly what they do.
 
-              <p>For more information on syntax highlighting for other languages, you can check the <a href="https://highlightjs.org/static/demo/">highlightJS demo</a>.</p>
+Use `npm install <pkg>` afterwards to install a package and
+save it as a dependency in the package.json file.
 
-              <h2 class="mb-3 mt-5">#3. Why do I need mathematical markup?</h2>
-              <p>Although the mark-up language HTML has a large repertoire of tags, it does not cater for math. With no means of using HTML tags to mark up mathematical expressions, authors have resorted to drastic means. For example, a popular method involves inserting images - literally snap shots of equations taken from other packages and saved in GIF format - into technical documents which have a mathematical or scientific content.</p>
+Press ^C at any time to quit.
+package name: (sample)
+version: (1.0.0)
+description:
+entry point: (index.js)
+test command:
+git repository:
+keywords:
+author:
+license: (ISC)
+About to write to C:\sample\package.json:
 
-              <h2 class="mb-3 mt-5">#4. Mathematical Markup Langauge (MathML)</h2>
-              <p><a href="https://www.w3.org/Math/whatIsMathML.html">MathML</a> is intended to facilitate the use and re-use of mathematical and scientific content on the Web. MathML can be used to encode both the presentation of mathematical notation for high-quality visual display, and mathematical content.</p>
-              <p>To add MathML to your webpage, we need to import the libraries for the same within the head tag. Both CSS and the JS script can be imported with a single link.</p>
-              <pre><code class="html hljs">&lt;script src=&quot;https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML-full&quot;&gt;&lt;/script&gt;</code></pre>
-              <p>MathML needs to be initialized and this can be done by adding this script within the head tag.</p>
-              <pre><code class="html hljs">&lt;script type=&quot;text/x-mathjax-config&quot;&gt;
-  //Note the above &lt;script&gt; attribute type=&quot;text/x-mathjax-config&quot; 
-  MathJax.Hub.Config({
-      tex2jax: {inlineMath: [[&quot;$&quot;,&quot;$&quot;],[&quot;\\(&quot;,&quot;\\)&quot;]]}
-  });
-&lt;/script&gt;</code></pre>
-              <p>For example to display the following mathematical equation: </p>
-              <p>$$(X^2 + Y^2) \le \Delta$$</p>
-              <p>The HTML code for the same would be: </p>
-              <pre><code class="html hljs">&lt;p&gt;$$(X^2 + Y^2) \le \Delta$$&lt;/p&gt;</code></pre>
-              <p>Click on the hyperlink to find more information on the <a href="https://oeis.org/wiki/List_of_LaTeX_mathematical_symbols">LaTeX commands for the math symbols</a>.</p>
+{
+  "name": "sample",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
 
+
+Is this OK? (yes) yes</code></pre>
+              <p>Install express-generator, a web framework for NodeJS to setup a webapp quickly.</p>
+              <pre><code class="bash hljs">npm install -g express-generator</code></pre>
+              <p>Once the package is installed, run this command to view the help.</p>
+              <pre><code class="bash hljs">C:\sample>express -h
+
+Usage: express [options] [dir]
+
+Options:
+
+      --version        output the version number
+  -e, --ejs            add ejs engine support
+      --pug            add pug engine support
+      --hbs            add handlebars engine support
+  -H, --hogan          add hogan.js engine support
+  -v, --view <engine>  add view <engine> support (dust|ejs|hbs|hjs|jade|pug|twig|vash) (defaults to jade)
+      --no-view        use static html instead of view engine
+  -c, --css <engine>   add stylesheet <engine> support (less|stylus|compass|sass) (defaults to plain css)
+      --git            add .gitignore
+  -f, --force          force on non-empty directory
+  -h, --help           output usage information</code></pre>
+              <p>We would like to create a static website so run the following command to create a webapp without any view.</p>
+              <pre><code class="bash hljs">C:\sample>express --no-view</code></pre>
+              <p>Now install all the dependencies using the following command.</p>
+              <pre><code class="bash hljs">C:\sample>npm install</code></pre>
+              <h2 class="mb-3 mt-5">#4. Running the webapp</h2>
+              <p>To test if the webapp is setup correctly, run the following command.</p>
+              <pre><code class="bash hljs">C:\sample>npm start
+
+> sample@0.0.0 start C:\sample
+> node ./bin/www
+</code></pre>
+              <p>You can access your website using http://localhost:3000. The webapp can be accessed by anyone in the network using the url <b>http://{machine-name}:3000 or http://{IP-address}:3000</b>.</p>
+              <p>
+                <img src="../images/blog1a.png" alt="" class="img-fluid">
+              </p>
+              <p>You can modify the html files and add your own content from the <b>./public/</b> folder in your workspace.</p>
               <div class="tag-widget post-tag-container mb-5 mt-5">
                 <div class="tagcloud">
                   <a href="#" class="tag-cloud-link">Tech</a>
-                  <a href="#" class="tag-cloud-link">Javascript</a>
-                  <a href="#" class="tag-cloud-link">Tutorial</a>
+                  <a href="#" class="tag-cloud-link">NodeJS</a>
                 </div>
               </div>
               
